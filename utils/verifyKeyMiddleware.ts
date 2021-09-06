@@ -64,6 +64,9 @@ function verifyKey(
   clientPublicKey: Uint8Array | ArrayBuffer | Buffer | string
 ): boolean {
   try {
+    console.log('signature:' + signature);
+    console.log('clientPublicKey:' + clientPublicKey);
+
     const timestampData = valueToUint8Array(timestamp);
     const bodyData = valueToUint8Array(body);
     const message = concatUint8Arrays(timestampData, bodyData);

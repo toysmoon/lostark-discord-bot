@@ -1,9 +1,14 @@
+import authorization from '@/bot/authorization';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handleInteraction(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req);
+  const isValid = authorization(req, res);
+  if (!isValid) {
+    return;
+  }
+
   res.status(200).json({ name: 'John Doe' });
 }

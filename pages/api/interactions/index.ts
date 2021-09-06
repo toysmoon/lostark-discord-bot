@@ -14,6 +14,14 @@ export default async function handleInteraction(
   if (type === 1) {
     res.status(200).json({ type: 2 });
   } else {
-    res.status(200).json({ name: 'test' });
+    res.status(200).json({
+      type: 4,
+      data: {
+        tts: false,
+        content: 'Congrats on sending your command!',
+        embeds: [],
+        allowed_mentions: { parse: [] },
+      },
+    });
   }
 }

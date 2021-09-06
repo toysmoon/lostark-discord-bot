@@ -10,5 +10,5 @@ export default function handleInteraction(
     return;
   }
 
-  res.status(200).json({ name: 'John Doe' });
+  res.status(200).json({ type: 1 });
 }

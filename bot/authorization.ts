@@ -1,6 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nacl from 'tweetnacl';
 
+function handleAuthError(res: NextApiResponse) {
+  res.status(401).end('invalid request signature');
+  return false;
+}
+
 export default function authorization(
   req: NextApiRequest,
   res: NextApiResponse
@@ -12,15 +17,18 @@ export default function authorization(
   const timestamp = (req.headers['X-Signature-Timestamp'] as string) ?? '';
   const body = req.body ?? '';
 
-  const isVerified = nacl.sign.detached.verify(
-    Buffer.from(timestamp + body),
-    Buffer.from(signature, 'hex'),
-    Buffer.from(PUBLIC_KEY, 'hex')
-  );
+  try {
+    const isVerified = nacl.sign.detached.verify(
+      Buffer.from(timestamp + body),
+      Buffer.from(signature, 'hex'),
+      Buffer.from(PUBLIC_KEY, 'hex')
+    );
 
-  if (!isVerified) {
-    res.status(401).end('invalid request signature');
-    return false;
+    if (!isVerified) {
+      return handleAuthError(res);
+    }
+  } catch (e) {
+    return handleAuthError(res);
   }
 
   return true;

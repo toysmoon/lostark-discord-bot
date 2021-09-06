@@ -5,6 +5,7 @@ export default function handleInteraction(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log(req.body);
   const type = req.body.type as number;
   if (type === 1) {
     return res.status(200).json({ type: 1 });

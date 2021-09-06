@@ -5,12 +5,9 @@ export default function handleInteraction(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.body);
   const type = req.body.type as number;
-  return res.status(200).json({ type: 1 });
-
   if (type === 1) {
-    return res.status(200).json({ type: 1 });
+    return res.status(200).json({ type: 2 });
   }
 
   const isValid = authorization(req, res);

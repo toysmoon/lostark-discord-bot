@@ -88,9 +88,8 @@ export default function verifyKeyMiddleware(
   }
 
   return async function (req: NextApiRequest, res: NextApiResponse) {
-    console.log(req.headers);
-    const timestamp = (req.headers['X-Signature-Timestamp'] ?? '') as string;
-    const signature = (req.headers['X-Signature-Ed25519'] ?? '') as string;
+    const timestamp = (req.headers['x-signature-timestamp'] ?? '') as string;
+    const signature = (req.headers['x-signature-ed25519'] ?? '') as string;
 
     function onBodyComplete(rawBody: Buffer) {
       if (!verifyKey(rawBody, signature, timestamp, clientPublicKey)) {

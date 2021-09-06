@@ -17,6 +17,9 @@ export default async function authorization(
   const timestamp = (req.headers['X-Signature-Timestamp'] as string) ?? '';
   const body = JSON.stringify(req.body);
 
+  console.log(req.headers);
+  console.log(body);
+
   try {
     const isVerified = nacl.sign.detached.verify(
       Buffer.from(timestamp + body),

@@ -1,11 +1,11 @@
 import authorization from '@/bot/authorization';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handleInteraction(
+export default async function handleInteraction(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const isValid = authorization(req, res);
+  const isValid = await authorization(req, res);
   if (!isValid) {
     return;
   }

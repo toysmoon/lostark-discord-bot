@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon -r dotenv/config",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node .next/customServer/index.js"
+    "start": "node .next/customServer/index.js"
   },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",

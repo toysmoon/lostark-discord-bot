@@ -15,9 +15,7 @@ export default async function authorization(
 
   const signature = (req.headers['X-Signature-Ed25519'] as string) ?? '';
   const timestamp = (req.headers['X-Signature-Timestamp'] as string) ?? '';
-  const body = await webhookPayloadParser(req);
-
-  console.log(body);
+  const body = JSON.stringify(req.body);
 
   try {
     const isVerified = nacl.sign.detached.verify(
@@ -37,14 +35,3 @@ export default async function authorization(
 
   return true;
 }
-
-const webhookPayloadParser = (req: NextApiRequest) =>
-  new Promise((resolve) => {
-    let data = '';
-    req.on('data', (chunk) => {
-      data += chunk;
-    });
-    req.on('end', () => {
-      resolve(Buffer.from(data).toString());
-    });
-  });

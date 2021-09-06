@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import addCharacter from '../database/addCharacter';
+import addCharacter from '../../database/addCharacter';
 
 export default async function add(id: string, msg: Message) {
   const [, sLevel, name] = msg.content.split(' ');

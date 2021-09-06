@@ -6,6 +6,6 @@ export default async function setUserData(name: string, type: string) {
 
   if (row) {
     row[type] = new Date().getTime();
-    row.save();
+    await row.save();
   }
 }

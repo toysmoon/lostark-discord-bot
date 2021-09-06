@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
-import add from './add';
-import getTodo from './getTodo';
+import add from '../command/add';
+import getTodo from '../command/getTodo';
 
 enum MESSAGE_TYPE {
   TODO = '!할일',

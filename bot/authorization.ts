@@ -17,6 +17,8 @@ export default async function authorization(
   const timestamp = (req.headers['X-Signature-Timestamp'] as string) ?? '';
   const body = await webhookPayloadParser(req);
 
+  console.log(body);
+
   try {
     const isVerified = nacl.sign.detached.verify(
       Buffer.from(timestamp + body),
